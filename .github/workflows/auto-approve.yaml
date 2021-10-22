@@ -32,4 +32,5 @@ jobs:
         env:
           AUTH_TOKEN: ${{ secrets.ACCEPT_TOKEN }}
         run: |
-          env
+          pull_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
+          echo $pull_number
