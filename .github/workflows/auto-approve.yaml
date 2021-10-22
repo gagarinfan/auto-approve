@@ -1,0 +1,21 @@
+name: Auto accept automat
+
+on: pull_request
+jobs:
+  auto-merge:
+    name: Check PRs to auto-accept
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v10.1
+
+      - name: List all modified files
+        run: |
+          for file in ${{ steps.changed-files.outputs.all_modified_files }}; do
+            echo "$file was modified"
+          done
