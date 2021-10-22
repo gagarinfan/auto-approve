@@ -19,7 +19,6 @@ jobs:
           for file in ${{ steps.changed-files.outputs.all_modified_files }}; do
             echo "$file was modified"
           done
-          echo ${{ steps.changed-files.outputs.all_modified_files }}
           list=${{ steps.changed-files.outputs.all_modified_files }}
           if [[ $list =~ "prod" ]]; then
             echo "Prod on the list!"
