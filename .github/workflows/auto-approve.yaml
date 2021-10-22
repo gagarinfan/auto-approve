@@ -15,6 +15,7 @@ jobs:
         uses: tj-actions/changed-files@v10.1
 
       - name: List all modified files
+        id: check-deploy-conditions
         run: |
           for file in ${{ steps.changed-files.outputs.all_modified_files }}; do
             echo "$file was modified"
@@ -24,4 +25,11 @@ jobs:
             echo "Prod on the list!"
           else
             echo "No prod!"
+            echo "::set-output name=accept::true"
           fi
+
+      - name: Accept PR
+        env:
+          AUTH_TOKEN: ${{ secrets.ACCEPT_TOKEN }}
+        run: |
+          env
