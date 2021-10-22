@@ -21,7 +21,7 @@ jobs:
           done
           echo ${{ steps.changed-files.outputs.all_modified_files }}
           list=${{ steps.changed-files.outputs.all_modified_files }}
-          if [[ $list =~ prod ]]; then
+          if [[ $list =~ "prod" ]]; then
             echo "Prod on the list!"
           else
             echo "No prod!"
