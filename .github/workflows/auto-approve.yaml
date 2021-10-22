@@ -29,10 +29,10 @@ jobs:
           fi
 
       - name: Accept PR
+        if: steps.check-deploy-conditions.outputs.accept
         env:
           AUTH_TOKEN: ${{ secrets.ACCEPT_TOKEN }}
         run: |
           pull_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
           echo $pull_number
-
           curl --user hypatos-ci:$AUTH_TOKEN -XPOST -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/gagarinfan/auto-approve/pulls/$pull_number/reviews -d '{"event":"APPROVE"}'
